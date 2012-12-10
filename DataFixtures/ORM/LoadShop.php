@@ -17,8 +17,36 @@ public function load(ObjectManager $manager)
     $Shop->setName('Фрагранс');
     $Shop->setLocation('Ленина 1');
     $Shop->setCity('Черкассы');
+    $Shop->setLastvisit(new \DateTime('tomorrow noon'));
+    $manager->persist($Shop);
 
-    $manager->persist($Entry);
+    $Shop = new Shop();
+    $Shop->setName('Свиточ');
+    $Shop->setLocation('Байды Вишнивецкого 41');
+    $Shop->setCity('Черкассы');
+    $Shop->setLastvisit(new \DateTime('tomorrow noon'));
+    $manager->persist($Shop);
+
+    $Shop = new Shop();
+    $Shop->setName('Казкова Майстерня');
+    $Shop->setLocation('ТЦ Метроград');
+    $Shop->setCity('Киев');
+    $Shop->setLastvisit(new \DateTime('tomorrow noon'));
+    $manager->persist($Shop);
+
+    $Shop = new Shop();
+    $Shop->setName('Буквица');
+    $Shop->setLocation('Хрещатик 217');
+    $Shop->setCity('Черкассы');
+    $Shop->setLastvisit(new \DateTime('tomorrow noon'));
+    $manager->persist($Shop);
+
+    $Shop = new Shop();
+    $Shop->setName('Кактус');
+    $Shop->setLocation('Шевченко 272');
+    $Shop->setCity('Черкассы');
+    $Shop->setLastvisit(new \DateTime('tomorrow noon'));
+    $manager->persist($Shop);
 
     $manager->flush();
 }

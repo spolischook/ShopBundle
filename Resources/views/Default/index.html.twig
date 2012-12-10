@@ -1,0 +1,9 @@
+{% extends "::base.html.twig" %}
+{% block title 'Component form' %}
+{% block body %}
+    <h1>Component form!</h1>
+    <form action="{{ path('shop_default_index') }}" method="post">
+        {{ form_widget(form) }}
+        <input type="submit">
+    </form>
+{% endblock %}

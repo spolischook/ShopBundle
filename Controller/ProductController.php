@@ -7,27 +7,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Serge\ShopBundle\Entity\Shop;
-use Serge\ShopBundle\Form\ShopType;
+use Serge\ShopBundle\Entity\Product;
+use Serge\ShopBundle\Form\ProductType;
 
 /**
- * Shop controller.
+ * Product controller.
  *
- * @Route("/")
+ * @Route("/product")
  */
-class ShopController extends Controller
+class ProductController extends Controller
 {
     /**
-     * Lists all Shop entities.
+     * Lists all Product entities.
      *
-     * @Route("/", name="shop")
+     * @Route("/", name="product")
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ShopBundle:Shop')->findAll();
+        $entities = $em->getRepository('ShopBundle:Product')->findAll();
 
         return array(
             'entities' => $entities,
@@ -35,19 +35,19 @@ class ShopController extends Controller
     }
 
     /**
-     * Finds and displays a Shop entity.
+     * Finds and displays a Product entity.
      *
-     * @Route("/{id}/show", name="shop_show")
+     * @Route("/{id}/show", name="product_show")
      * @Template()
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ShopBundle:Shop')->find($id);
+        $entity = $em->getRepository('ShopBundle:Product')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Shop entity.');
+            throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -59,15 +59,15 @@ class ShopController extends Controller
     }
 
     /**
-     * Displays a form to create a new Shop entity.
+     * Displays a form to create a new Product entity.
      *
-     * @Route("/new", name="shop_new")
+     * @Route("/new", name="product_new")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Shop();
-        $form   = $this->createForm(new ShopType(), $entity);
+        $entity = new Product();
+        $form   = $this->createForm(new ProductType(), $entity);
 
         return array(
             'entity' => $entity,
@@ -76,16 +76,16 @@ class ShopController extends Controller
     }
 
     /**
-     * Creates a new Shop entity.
+     * Creates a new Product entity.
      *
-     * @Route("/create", name="shop_create")
+     * @Route("/create", name="product_create")
      * @Method("POST")
-     * @Template("ShopBundle:Shop:new.html.twig")
+     * @Template("ShopBundle:Product:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity  = new Shop();
-        $form = $this->createForm(new ShopType(), $entity);
+        $entity  = new Product();
+        $form = $this->createForm(new ProductType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -93,7 +93,7 @@ class ShopController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('shop_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('product_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -103,22 +103,22 @@ class ShopController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Shop entity.
+     * Displays a form to edit an existing Product entity.
      *
-     * @Route("/{id}/edit", name="shop_edit")
+     * @Route("/{id}/edit", name="product_edit")
      * @Template()
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ShopBundle:Shop')->find($id);
+        $entity = $em->getRepository('ShopBundle:Product')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Shop entity.');
+            throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
-        $editForm = $this->createForm(new ShopType(), $entity);
+        $editForm = $this->createForm(new ProductType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -129,31 +129,31 @@ class ShopController extends Controller
     }
 
     /**
-     * Edits an existing Shop entity.
+     * Edits an existing Product entity.
      *
-     * @Route("/{id}/update", name="shop_update")
+     * @Route("/{id}/update", name="product_update")
      * @Method("POST")
-     * @Template("ShopBundle:Shop:edit.html.twig")
+     * @Template("ShopBundle:Product:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ShopBundle:Shop')->find($id);
+        $entity = $em->getRepository('ShopBundle:Product')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Shop entity.');
+            throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new ShopType(), $entity);
+        $editForm = $this->createForm(new ProductType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('shop_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('product_edit', array('id' => $id)));
         }
 
         return array(
@@ -164,9 +164,9 @@ class ShopController extends Controller
     }
 
     /**
-     * Deletes a Shop entity.
+     * Deletes a Product entity.
      *
-     * @Route("/{id}/delete", name="shop_delete")
+     * @Route("/{id}/delete", name="product_delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
@@ -176,17 +176,17 @@ class ShopController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ShopBundle:Shop')->find($id);
+            $entity = $em->getRepository('ShopBundle:Product')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Shop entity.');
+                throw $this->createNotFoundException('Unable to find Product entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('shop'));
+        return $this->redirect($this->generateUrl('product'));
     }
 
     private function createDeleteForm($id)
