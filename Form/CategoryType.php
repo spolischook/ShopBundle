@@ -12,7 +12,7 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('id_parent', 'entity', array(
+            ->add('parent', 'entity', array(
             'class' => 'ShopBundle:Category',
             'property' => 'name',
             'empty_value' => 'root category',

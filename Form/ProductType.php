@@ -12,12 +12,14 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('id_category')
+            ->add('id_category', 'entity', array(
+            'class' => 'ShopBundle:Category',
+            'property' => 'name',
+        ))
             ->add('price', 'money', array(
             'currency' => 'UAH'
         ))
             ->add('weight')
-            ->add('category')
         ;
     }
 

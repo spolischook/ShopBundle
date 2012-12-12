@@ -50,7 +50,7 @@ class Product
     private $weight;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="Product")
      * @ORM\JoinColumn(name="id_category", referencedColumnName="id")
      */
     protected $category;

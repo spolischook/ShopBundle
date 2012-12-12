@@ -32,12 +32,13 @@ class Category
     private $name;
 
     /**
-     * @var integer
+     * @var object
      *
-     * @Assert\Type(type="integer", message="Category id is not valid")
-     * @ORM\Column(name="id_parent", type="integer", nullable=true)
+     * @ORM\OneToOne(targetEntity="Category")
+     * @ORM\JoinColumn(name="parent", referencedColumnName="id")
+     * @ORM\Column(unique=false, nullable=true)
      */
-    private $id_parent;
+    private $parent;
 
     /**
      * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
@@ -84,26 +85,19 @@ class Category
     }
 
     /**
-     * Set id_parent
-     *
-     * @param integer $idParent
-     * @return Category
+     * @return int
      */
-    public function setIdParent($idParent)
+    public function getParent()
     {
-        $this->id_parent = $idParent;
-    
-        return $this;
+        return $this->parent;
     }
 
     /**
-     * Get id_parent
-     *
-     * @return integer 
+     * @param int $id_category
      */
-    public function getIdParent()
+    public function setParent($parent)
     {
-        return $this->id_parent;
+        $this->parent = $parent;
     }
 
     /**
